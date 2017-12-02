@@ -2,9 +2,8 @@
 // You are granted permission to use it to construct your answer to a ${course} assignment.
 // You may not distribute it in any other way without permission.
 /* Code for ${course} - 2017T2
-* Name:
-* Username:
-* ID:
+* Name:谭宇轩Chris、王雅玲Chloe
+* ID:1624092225/1624092230
 */
 import ecs100.*;
 import java.util.*;
@@ -105,7 +104,6 @@ public class ClassTimes {
                   Scanner scan = new Scanner(new File("classdata.txt"));
                   while(scan.hasNext()){
                       String line = scan.nextLine();
-                      int i = 0;
                       if(line.contains(targetRoom)){
                         UI.println(line);
                     }
@@ -138,15 +136,12 @@ public class ClassTimes {
            try {
                   Scanner scan = new Scanner(new File("classdata.txt"));
                   while(scan.hasNext()){
-                      String line = scan.nextLine();
-                      Scanner room1 = new Scanner(line);
-                      Scanner room2 = new Scanner(line);
-                      Scanner day = new Scanner(line);
-                    
-                      
+                      String day = scan.nextLine();
+                      if((day.contains(targetDay)&&day.contains(targetRoom1))||(day.contains(targetDay)&&day.contains(targetRoom2))){
+                          UI.println(day);
+                        }     
                 }
             }
-            
            catch(IOException e) {UI.printf("File Failure %s \n", e);}
 
            UI.println("=========================");
@@ -189,7 +184,25 @@ public class ClassTimes {
 
     public void bookingsFileForRoom(String targetRoom){
            UI.println("Generating room booking file for " + targetRoom);
-           /*# YOUR CODE HERE */
+           try {
+               PrintStream booking = new PrintStream(new File (targetRoom+"_bookings.txt"));
+               Scanner scan = new Scanner(new File("classdata.txt"));
+                   while(scan.hasNext()){
+                        String course = scan.next();
+                        String type = scan.next();
+                        String day = scan.next();
+                        String startTime = scan.next();
+                        String endTime = scan.next();
+                        String room = scan.nextLine();
+                  if(room.contains(targetRoom)){
+                        booking.println("Course: "+course);
+                        booking.println("Time: "+day+" "+startTime+"-"+endTime);
+                        booking.println("Session: "+type);
+                        booking.println("");
+                  }
+            }
+        }
+           catch(IOException e) {UI.printf("File Failure %s \n", e);}
 
            UI.println("Printed to "+targetRoom+"_Bookings.txt");
            UI.println("=========================");
@@ -216,10 +229,19 @@ public class ClassTimes {
            }
            UI.println("=========================");
     }
+    
+    public int Time(String StarTime,String EndTime){
+          int StartH = Integer.parseInt(StarTime.substring(0,2)); 
+          int StartS = Integer.parseInt(StarTime.substring(2,4));
+          int EndH = Integer.parseInt(EndTime.substring(0,2));
+          int EndS = Integer.parseInt(EndTime.substring(2,4));
+          int Time = (EndH-StartH)*60+(EndS-StartS);
+          
+          return Time;
+    } 
 
     public double meanClassLength(String targetRoom){
-           /*# YOUR CODE HERE */
-
+           
            return 0.0; // to make it compile
     }
 
