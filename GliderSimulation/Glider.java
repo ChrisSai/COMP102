@@ -31,7 +31,8 @@ public class Glider{
 
     // Fields to store position and speed (ie, the horizontal step size)
     private double height;
-    private double speed;
+    private double xspeed;
+    private double yspeed;
     private double distance;
     // Constructor
     /**
@@ -44,7 +45,7 @@ public class Glider{
         */
     public Glider(double ht, double sp){
            this.height = ht;
-           this.speed = sp;
+           this.xspeed = sp;
     }
     
     // Methods
@@ -58,17 +59,29 @@ public class Glider{
         * DO NOT REDRAW THE GLIDER!!!
         */
     public void move(){
-           distance = distance + speed ;
-           if(speed == MID_SPEED){
-           height =height;
+          double yspeed = Math.random()*5;
+          if(xspeed > MID_SPEED && height <=400){
+            distance = distance + xspeed;
+            height = height - yspeed;
+            }
+            else if(xspeed == MID_SPEED && height <=400){
+            distance = distance + xspeed;
+            height = height;
            }
-           else if(speed < MID_SPEED){
-           height = height + speed;    
+            else if(xspeed < MID_SPEED && height <=400){
+            distance = distance + xspeed;
+            height = height + yspeed;
            }
-           else if(speed > MID_SPEED){
-           height = height - speed;
+           else if(height <= 0){
+            distance = distance + xspeed;
+            height = height + yspeed;
            }
-    }
+           else{
+               distance = distance;
+               height = height;
+            }
+        }
+           
 
     /**
         * Draw the glider in its current position.
@@ -90,16 +103,17 @@ public class Glider{
 
     /** Return the current height of the glider */
     public double getHeight(){
-          double yPosition = height;
+          double yPosition = 400 - height;
 
-           return yPosition;//return 10;   //This is wrong!! but it will make the code compile until you replace it.
+           return yPosition;   //This is wrong!! but it will make the code compile until you replace it.
     }
 
     /** Change the speed of the glider */
     public void setSpeed(double sp){
-           speed = sp;
+           xspeed = sp;
            
     }
+
 
 
 

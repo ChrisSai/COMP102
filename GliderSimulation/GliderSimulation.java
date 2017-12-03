@@ -41,7 +41,7 @@ public class GliderSimulation{
                   Glider gliderB = this.makeNewGlider();
                   gliderA.draw();
                   gliderB.draw();
-	         //loop for as long as at least one glider is flying.
+             //loop for as long as at least one glider is flying.
                   while ( gliderA.getHeight()> 0 || gliderB.getHeight()>0 ){
                          // make each glider move
                          gliderA.move();
@@ -78,9 +78,9 @@ public class GliderSimulation{
     /** Helper method that makes a new Glider with random initial values */
     public Glider makeNewGlider(){
            double initHeight = 50 + Math.random()*(CEILING-100); // random height
-           double xSpeed = Math.random()*12;          // random step size between 1 and 12.
+           double xSpeed = Math.random()*12;                 // random step size between 1 and 12.
            return new Glider(initHeight, xSpeed);
-    }	
+    }   
 
     public void clearRoom(){
            UI.eraseRect(0, FLOOR-CEILING-1, RIGHT_WALL-1, CEILING-2);
@@ -101,6 +101,6 @@ public class GliderSimulation{
     /** Create a new Simulation object */
     public static void main(String[] arguments){
            new GliderSimulation();
-    }	
+    }   
 
 }
