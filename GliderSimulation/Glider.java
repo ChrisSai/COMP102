@@ -2,9 +2,9 @@
 // You are granted permission to use it to construct your answer to a ${course} assignment.
 // You may not distribute it in any other way without permission.
 /* Code for ${course} - 2017T2
-* Name:
+* Name:??? ???
 * Username:
-* ID:
+* ID:1624092225 1624092230
 */
 import ecs100.*;
 import java.awt.Color;
@@ -26,7 +26,7 @@ public class Glider{
     public static final double HORIZ_SIZE = 48;   // horizontal size of all gliders
     public static final double VERT_SIZE = 12;    // vertical size of all gliders
     public static final double FLOOR = 400;          // position of the floor
-
+    public static final double CEILING = 350;
     public static final double MID_SPEED = 6;  // speed at which gliders neither fall nor rise
 
     // Fields to store position and speed (ie, the horizontal step size)
@@ -59,27 +59,29 @@ public class Glider{
         * DO NOT REDRAW THE GLIDER!!!
         */
     public void move(){
-          double yspeed = Math.random()*5;
-          if(xspeed > MID_SPEED && height <=400){
+          if(xspeed > MID_SPEED && height <=FLOOR - VERT_SIZE){
             distance = distance + xspeed;
-            height = height - yspeed;
+            height = height - xspeed * 2.5;
             }
-            else if(xspeed == MID_SPEED && height <=400){
+            else if(xspeed == MID_SPEED && height <=FLOOR - VERT_SIZE){
             distance = distance + xspeed;
-            height = height;
+            height = height - xspeed;
            }
-            else if(xspeed < MID_SPEED && height <=400){
+            else if(xspeed < MID_SPEED && height <=FLOOR - VERT_SIZE){
             distance = distance + xspeed;
-            height = height + yspeed;
+            height = height + xspeed * 0.5;
            }
            else if(height <= 0){
             distance = distance + xspeed;
-            height = height + yspeed;
+            height = height + yspeed * 0.5;
            }
-           else{
+           else if(height >= FLOOR - VERT_SIZE){
                distance = distance;
                height = height;
             }
+           else
+           {distance = distance;
+               height = height;}
         }
            
 
